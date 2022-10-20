@@ -1,2 +1,2 @@
 # springboot
-currency conversion and exchange project
+currency conversion and exchange microservice project
