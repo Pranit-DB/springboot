@@ -1,0 +1,34 @@
+Currency exchange service
+http://localhost:8000/currency-exchange/from/USD/to/INR
+
+Currency conversion service
+http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
+
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException:
+ Syntax error in SQL statement "create table currency_exchange
+  (id bigint not null, conversion numeric(19,2), environment varchar(255),
+   [*]from varchar(255), to varchar(255), primary key (id))";
+    expected "identifier"; SQL statement:
+
+ create table currency_exchange (id bigint not null,
+ conversion numeric(19,2), environment varchar(255), 
+ from varchar(255), to varchar(255), primary key (id)) [42001-214]	
+
+Eureka Server
+http://localhost:8761
+
+
+API Gateway: to call any micro-service which is registered with Eureka server
+http://localhost:8765/CURRENCY-EXCHANGE/currency-exchange/from/USD/to/INR
+http://localhost:8765/CURRENCY-CONVERSION/currency-conversion/from/USD/to/INR/quantity/10
+http://localhost:8765/CURRENCY-CONVERSION/currency-conversion-feign/from/USD/to/INR/quantity/10
+
+//using >> spring.cloud.gateway.discovery.locator.lowerCaseServiceId = true
+http://localhost:8765/currency-exchange/currency-exchange/from/USD/to/INR
+http://localhost:8765/currency-conversion/currency-conversion/from/USD/to/INR/quantity/10
+http://localhost:8765/currency-conversion/currency-conversion-feign/from/USD/to/INR/quantity/10
+
+// updated URI using ApiGatewayconfiguration file 
+http://localhost:8765/currency-exchange/from/USD/to/INR
+http://localhost:8765/currency-conversion/from/USD/to/INR/quantity/10
+http://localhost:8765/currency-conversion-feign/from/USD/to/INR/quantity/10
